@@ -1,0 +1,11 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./lib",
+    "baseUrl": "src",
+    "declaration": false,
+    "module": "none",
+    "moduleResolution": "node",
+    "target": "es6"
+  }
+}

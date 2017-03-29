@@ -1,0 +1,47 @@
+{
+  "name": "racl",
+  "version": "1.0.0-dev.0",
+  "versions": {
+    "dev": "1.0.0-dev.0",
+    "stage": "1.0.0-rc.0"
+  },
+  "description": "Resource Access Control List",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "gulp && mocha --timeout 300000 --slow 0 --reporter spec --bail --check-leaks test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaeljstutz/node-racl.git"
+  },
+  "author": "Michael Stutz <michaeljstutz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michaeljstutz/node-racl/issues"
+  },
+  "homepage": "https://github.com/michaeljstutz/node-racl#readme",
+  "devDependencies": {
+    "@types/lodash": "^4.14.58",
+    "@types/node": "^7.0.12",
+    "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "dts-generator": "^2.1.0",
+    "gulp": "^3.9.1",
+    "gulp-json-editor": "^2.2.1",
+    "gulp-tslint": "^7.1.0",
+    "gulp-typescript": "^3.1.6",
+    "gulp-util": "^3.0.8",
+    "mocha": "^3.2.0",
+    "run-sequence": "^1.2.2",
+    "semver": "^5.3.0",
+    "sinon": "^2.1.0",
+    "through2": "^2.0.3",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.2",
+    "uuid": "^3.0.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
