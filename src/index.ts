@@ -9,6 +9,8 @@ export interface RACLInterface {
   deny(resource: string | Array<string>, action: string | Array<string>): void;
 }
 
+const VARIATION_SPLITTER = ',';
+
 export class RACL implements RACLInterface {
   
   private _index: any = {
@@ -32,6 +34,7 @@ export class RACL implements RACLInterface {
         ],
         sectionCount: 1,
         sectionSeparator: ':',
+        sectionVariationFormat: '/',
         wildcard: '*',
       },
       action: {
@@ -130,33 +133,51 @@ export class RACL implements RACLInterface {
     // TODO: add more formats
     // TODO: use a diffrenct normalizing value, '-' will cause issues down the road
     let normalizeValue;
+    let splitter = VARIATION_SPLITTER;
     let denormalizefunction = (values)=>{
-      return _.join(values);
+      return _.join(values, splitter);
     };
 
     switch (format) {
       case 'pascal':
-        normalizeValue = _.kebabCase(sectionValue);
+        splitter = '-';
+        normalizeValue = (_.kebabCase(sectionValue));
         denormalizefunction = values=>{
           return _.upperFirst(_.camelCase(_.join(values, '-')))
         }
         break;
       case 'kebab':
+        splitter = '-';
         normalizeValue = sectionValue;
         denormalizefunction = values=>{
           return _.upperFirst(_.camelCase(_.join(values, '-')))
         }
         break;
       case ':':
-        normalizeValue = sectionValue.replace(':', '-');
+        splitter = ':';
+        normalizeValue = sectionValue;
         denormalizefunction = values=>{
           return _.join(values, ':');
         }
         break;
+      case VARIATION_SPLITTER:
+        normalizeValue = sectionValue;
+        denormalizefunction = values=>{
+          return _.join(values, splitter);
+        }
+        break;
       case '-':
+        splitter = '-';
         normalizeValue = sectionValue;
         denormalizefunction = values=>{
           return _.join(values, '-');
+        }
+        break;
+      case '/':
+        splitter = '/';
+        normalizeValue = sectionValue;
+        denormalizefunction = values=>{
+          return _.join(values, '/');
         }
         break;
       default:
@@ -164,7 +185,7 @@ export class RACL implements RACLInterface {
         return [sectionValue];
     }
 
-    let forwardValues = _.split(normalizeValue, '-');
+    let forwardValues = _.split(normalizeValue, splitter);
     let reverseValues = _.clone(forwardValues);
     let reverseVariations = [];
     let forwardVariations = [];
