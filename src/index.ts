@@ -57,6 +57,9 @@ export class RACL implements RACLInterface {
     if (_.isNil(statement)) throw new Error('Missing require arg');
     if (!_.isArray(statement)) statement = [statement];
     for (let i=0, l=(<Array<any>>statement).length; i<l; i++) {
+      // TODO: should we throw an error?
+      // If we are missing any of the required fields skip
+      if (!_.has(statement[i], 'effect')||!_.has(statement[i], 'resource')||!_.has(statement[i], 'action')) continue;
       this.add(statement[i].effect, statement[i].resource, statement[i].action);
     }
   }
