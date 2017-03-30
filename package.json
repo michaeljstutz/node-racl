@@ -1,8 +1,8 @@
 {
   "name": "racl",
-  "version": "1.0.0-dev.0",
+  "version": "1.0.0-dev.1",
   "versions": {
-    "dev": "1.0.0-dev.0",
+    "dev": "1.0.0-dev.1",
     "stage": "1.0.0-rc.0"
   },
   "description": "Resource Access Control List",
